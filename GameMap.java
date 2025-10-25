@@ -10,6 +10,6 @@ public class GameMap{
         frame.setVisible(true);
     }
     public JButton(Icon icon);
-
+    ();
     
 }
