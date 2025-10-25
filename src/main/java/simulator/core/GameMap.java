@@ -1,4 +1,4 @@
-package main.java;
+package simulator.core;
 
 import javax.swing.*;
 
