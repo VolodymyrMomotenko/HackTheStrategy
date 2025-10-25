@@ -1,0 +1,18 @@
+# Maven
+target/
+
+# Build outputs
+*.class
+*.jar
+*.war
+
+# System
+.DS_Store
+
+# JavaFX
+*.tmp
+*.log
+
+# VS Code
+.vscode/
+*.code-workspace
