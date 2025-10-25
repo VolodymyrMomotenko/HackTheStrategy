@@ -26,14 +26,6 @@ public class Position
             for (int col = 0; col < board[row].length; col++)
             {
                 newBoard[row][col] = board[row][col];
-
-                // Only if pieces themselves suddently becme mutable
-                // Piece oldPiece = board[row][col];
-                // if (oldPiece != null)
-                // {
-                //     Piece newPiece = oldPiece.copy();
-                //     newBoard[row][col] = newPiece;
-                // }
             }
         }
 

@@ -1,5 +1,5 @@
 package simulator.core.player;
 
-public class human {
+public abstract class Player {
     
 }

@@ -53,7 +53,7 @@ public class Board extends GridPane {
         {
             for (int file = 0; file < 10; file++)
             {
-                Color squareColor = (file + rank) % 2 == 0 ? Color.GRAY : Color.DARKGREY;
+                Color squareColor = (file + rank) % 2 == 0 ? Color.rgb(240, 240, 240) : Color.rgb(231, 231, 231);
                 Square squarePane = new Square(squareColor, SQUARE_SIZE);
                 squares[file][rank] = squarePane;
                 add(squarePane, file, rank);

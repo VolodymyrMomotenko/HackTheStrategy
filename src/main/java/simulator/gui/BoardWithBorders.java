@@ -2,7 +2,9 @@ package simulator.gui;
 
 import simulator.core.Colour;
 import simulator.core.game.Game;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -14,17 +16,36 @@ public class BoardWithBorders extends GridPane
 {
     private static final int SQUARE_SIZE = 80;
     private final Board board;
+    private VBox sidePanel;
+    private Label coordinateLabel;
 
     public BoardWithBorders(Game game)
     {
         this.board = new Board(game);
-        buildCoordinateSystem();
+        setupCombinedLayout();
+    }
+
+    private void setupCombinedLayout()
+    {
+        sidePanel = new VBox(10);
+        sidePanel.setPadding(new Insets(20));
+        sidePanel.setPrefWidth(200);
+        
+         
+        coordinateLabel = new Label("No tile selected");
+        Button endTurnButton = new Button("End Turn");
+        
+        sidePanel.getChildren().addAll(coordinateLabel, endTurnButton);
+        
+        // board is not board with the sidelabel
+        buildCoordinateSystem(); // square from (0, 0) to (11, 11)
+        add(sidePanel, 12, 0, 1, 12); // Add sidepanel for col 12
     }
 
     public void connectBoardToThis()
     {
         board.border = this;
-    } 
+    }
 
     private void buildCoordinateSystem() {
         
