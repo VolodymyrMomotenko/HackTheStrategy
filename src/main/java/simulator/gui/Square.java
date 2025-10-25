@@ -35,6 +35,7 @@ public class Square extends StackPane
     {
         setLayer(LAYER_HIGHLIGHT, highlight);
     }
+
     
     private void setLayer(int index, Node node)
     {
