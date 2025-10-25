@@ -1,7 +1,7 @@
 import javax.swing.*;
 
 
-public class GameMao{
+public class GameMap{
     public static void main(String[] args) {
         JFrame frame = new JFrame("Game");
         frame.setSize(1000, 600); 
@@ -9,5 +9,7 @@ public class GameMao{
         frame.setLayout(null); 
         frame.setVisible(true);
     }
+    public JButton(Icon icon);
+
     
 }
