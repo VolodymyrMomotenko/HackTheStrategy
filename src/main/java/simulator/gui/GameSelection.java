@@ -31,7 +31,7 @@ public class GameSelection extends Application
         
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Game mode selection");
+        primaryStage.setTitle("HackTheStrategy Launcher");
         primaryStage.show();
     }
     
@@ -43,7 +43,7 @@ public class GameSelection extends Application
 
         Scene gameScene = new Scene(board);
         gameStage.setScene(gameScene);
-        gameStage.setTitle("skibidi Toalety");
+        gameStage.setTitle("HackTheStrategy");
         gameStage.show();
     }
     

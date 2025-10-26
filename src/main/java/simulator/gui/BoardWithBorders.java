@@ -34,15 +34,14 @@ public class BoardWithBorders extends GridPane
          
         coordinateLabel1 = new Label("Your Stats:\n$ : " + "\nIncome per turn $ : " + "\nZones : " + "\nMines : " + "\nFarms : ");
 
-        coordinateLabel2 = new Label("Bot 1");
 
-        coordinateLabel3 = new Label("Bot 2");
-
-        coordinateLabel4 = new Label("Bot 3");
-
+        Button buyZone = new Button("Buy a zone");
+        Button buildFarm = new Button("Build a farm for 8");
         Button endTurnButton = new Button("End Turn");
         
-        sidePanel.getChildren().addAll(coordinateLabel1,coordinateLabel2, coordinateLabel3, coordinateLabel4, endTurnButton);
+        
+        
+        sidePanel.getChildren().addAll(coordinateLabel1, buyZone, buildFarm, endTurnButton);
         
         // board is not board with the sidelabel
         buildCoordinateSystem(); // square from (0, 0) to (11, 11)
