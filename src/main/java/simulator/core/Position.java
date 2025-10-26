@@ -30,7 +30,7 @@ public class Position
         return newBoard;
     }
 
-    public Tile getInterestPoint(int file, int rank)
+    public Tile getTile(int file, int rank)
     {
         return board[file][rank];
     }

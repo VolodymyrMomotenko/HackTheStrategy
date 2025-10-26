@@ -22,6 +22,14 @@ public class Game3bots extends Game
         // Create an empty board for now
         Tile[][] board = new Tile[10][10];
 
+        for (int x = 0; x < 10; x++)
+        {
+            for (int y = 0; y < 10; y++)
+                board[x][y] = new Tile(x, y);
+        }
+
+        board[0][1].setInterestPoint(new Mine());
+
         // Set the starting position
         this.startingPosition = new Position(board, Colour.WHITE);
     }
