@@ -1,5 +1,9 @@
 package simulator.core.player;
 
-public class botPlayer {
-    
+import simulator.core.Colour;
+
+public class botPlayer extends Player{
+    public botPlayer(Colour colour){
+        super(colour);
+    }
 }

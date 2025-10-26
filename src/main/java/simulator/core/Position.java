@@ -1,5 +1,6 @@
 package simulator.core;
 
+import simulator.core.pointsOfInterest.InterestPoint;
 
 public class Position
 {
@@ -14,6 +15,10 @@ public class Position
         this.board = board;
         this.turn = turn;
     }
+
+    // public Boolean canAquire(int file, int rank){
+        
+    // }
 
     public Tile[][] deepCopyBoard()
     {
