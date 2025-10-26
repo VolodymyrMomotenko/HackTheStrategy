@@ -46,7 +46,7 @@ public abstract class Player {
 
 
     // kinda setters (more like adders)
-    public void addWealth(int money){
+    public void addWealth(){
         this.wealth += this.income;
     }
 

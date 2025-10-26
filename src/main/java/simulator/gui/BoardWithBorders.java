@@ -46,6 +46,8 @@ public class BoardWithBorders extends GridPane
         Button buyZone = new Button("Buy a zone");
         Button buildFarm = new Button("Build a farm for 8");
         Button endTurnButton = new Button("End Turn");
+
+        endTurnButton.setOnAction(e -> {player.addIncome(); player.addWealth(); updateStats();});
         
         
         
@@ -55,6 +57,16 @@ public class BoardWithBorders extends GridPane
         buildCoordinateSystem(); // square from (0, 0) to (11, 11)
         add(sidePanel, 12, 0, 1, 12); // Add sidepanel for col 12
     }
+
+    public void updateStats()
+    {
+        coordinateLabel1.setText("Your Stats:\n$ : " + player.getWealth()
+                + "\nIncome per turn $ : " + player.getIncome()
+                + "\nZones : " + player.getTiles()
+                + "\nMines : " + player.getMines()
+                + "\nFarms : " + player.getFarms());
+    }
+
 
     public void updateSelectionInfo()
     {
