@@ -43,15 +43,27 @@ public class Game3bots extends Game
         board[6][6].setInterestPoint(new Mine());
 
 
-        board[0][0].setInterestPoint(new Farm());
+        
 
 
 
 
         board[0][0].setColour(Colour.RED);
+        board[0][1].setColour(Colour.RED);
+        board[1][0].setColour(Colour.RED);
+        board[1][1].setColour(Colour.RED);
         board[9][0].setColour(Colour.GREEN);
+        board[9][1].setColour(Colour.GREEN);
+        board[8][0].setColour(Colour.GREEN);
+        board[8][1].setColour(Colour.GREEN);
         board[9][9].setColour(Colour.YELLOW);
+        board[9][8].setColour(Colour.YELLOW);
+        board[8][9].setColour(Colour.YELLOW);
+        board[8][8].setColour(Colour.YELLOW);
         board[0][9].setColour(Colour.BLUE);
+        board[1][9].setColour(Colour.BLUE);
+        board[0][8].setColour(Colour.BLUE);
+        board[1][8].setColour(Colour.BLUE);
 
         // Set the starting position
         this.position = new Position(board, Colour.RED);
