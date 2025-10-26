@@ -11,13 +11,16 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import simulator.core.player.HumanPlayer;
+import simulator.core.player.Player;
 
 public class BoardWithBorders extends GridPane
 {
     private static final int SQUARE_SIZE = 80;
     private final Board board;
     private VBox sidePanel;
-    private Label coordinateLabel1, coordinateLabel2, coordinateLabel3, coordinateLabel4;
+    private Label coordinateLabel1;
+    public HumanPlayer player = new HumanPlayer(Colour.YELLOW);
 
     public BoardWithBorders(Game game)
     {
@@ -30,9 +33,13 @@ public class BoardWithBorders extends GridPane
         sidePanel = new VBox(10);
         sidePanel.setPadding(new Insets(20));
         sidePanel.setPrefWidth(200);
-        
-         
-        coordinateLabel1 = new Label("Your Stats:\n$ : " + "\nIncome per turn $ : " + "\nZones : " + "\nMines : " + "\nFarms : ");
+
+
+        coordinateLabel1 = new Label("Your Stats:\n$ : " + player.getWealth()
+                + "\nIncome per turn $ : " + player.getIncome()
+                + "\nZones : " + player.getTiles()
+                + "\nMines : " + player.getMines()
+                + "\nFarms : " + player.getFarms());
 
 
         Button buyZone = new Button("Buy a zone");
