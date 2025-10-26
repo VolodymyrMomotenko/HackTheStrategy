@@ -17,7 +17,7 @@ public class BoardWithBorders extends GridPane
     private static final int SQUARE_SIZE = 80;
     private final Board board;
     private VBox sidePanel;
-    private Label coordinateLabel;
+    private Label coordinateLabel1, coordinateLabel2, coordinateLabel3, coordinateLabel4;
 
     public BoardWithBorders(Game game)
     {
@@ -32,10 +32,17 @@ public class BoardWithBorders extends GridPane
         sidePanel.setPrefWidth(200);
         
          
-        coordinateLabel = new Label("No tile selected");
+        coordinateLabel1 = new Label("Your Stats:\n$ : " + "\nIncome per turn $ : " + "\nZones : " + "\nMines : " + "\nFarms : ");
+
+        coordinateLabel2 = new Label("Bot 1");
+
+        coordinateLabel3 = new Label("Bot 2");
+
+        coordinateLabel4 = new Label("Bot 3");
+
         Button endTurnButton = new Button("End Turn");
         
-        sidePanel.getChildren().addAll(coordinateLabel, endTurnButton);
+        sidePanel.getChildren().addAll(coordinateLabel1,coordinateLabel2, coordinateLabel3, coordinateLabel4, endTurnButton);
         
         // board is not board with the sidelabel
         buildCoordinateSystem(); // square from (0, 0) to (11, 11)

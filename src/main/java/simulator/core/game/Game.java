@@ -6,12 +6,15 @@ import java.util.List;
 
 import simulator.core.Colour;
 import simulator.core.Position;
+import simulator.core.player.Player;
 
 public abstract class Game
 {
     protected String firstplayer;
     protected Position position;
     protected Position cachedCurrentPosition;
+
+    protected Player[] players = new Player[4];
 
     private int moveCounter; // for 50 move rule
 

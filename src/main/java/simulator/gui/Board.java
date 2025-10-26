@@ -62,8 +62,8 @@ public class Board extends GridPane {
 
                 InterestPoint point = game.getPosition().getTile(file, 9-rank).getInterestPoint();
                 InterestPointRender render = point == null ? null : new InterestPointRender(point);
-
                 squarePane.setPoint(render);
+
                 squares[file][rank] = squarePane;
                 add(squarePane, file, rank);
 

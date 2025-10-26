@@ -4,7 +4,7 @@ public class Mine extends InterestPoint
 {
     public Mine()
     {
-        super(11, 4);
+        super(15, 4);
 
     }
 
