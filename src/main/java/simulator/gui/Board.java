@@ -33,8 +33,9 @@ public class Board extends GridPane {
     private final Game game;
     private Square[][] squares = new Square[10][10];
 
-    private Integer selectedFile = null;
-    private Integer selectedRank = null;
+    private Square selectedSquare = null;
+    private int selectedFile = -1;
+    private int selectedRank = -1;
 
     
     public boolean shouldFlip = true;
@@ -110,7 +111,7 @@ public class Board extends GridPane {
                 InterestPoint point = game.getPosition().getTile(file, 9-rank).getInterestPoint();
                 InterestPointRender render = point == null ? null : new InterestPointRender(point);
                 squares[file][rank].setPoint(render);
-                System.out.println("File: " + file + " Rank: " + rank + " Colour " + tileColour + " point " + point);
+                //System.out.println("File: " + file + " Rank: " + rank + " Colour " + tileColour + " point " + point);
             }
         }
     }
@@ -123,8 +124,18 @@ public class Board extends GridPane {
 
     private void handleSquareClick(int file, int rank)
     {
-
-        highlightSelection(file, rank);
+        clearSelections();
+        if (selectedSquare == null || selectedSquare != squares[file][rank])
+        {
+            highlightSelection(file, rank);
+            selectedSquare = squares[file][rank];
+            selectedFile = file;
+            selectedRank = rank;
+        }
+        else
+        {
+            selectedSquare = null;
+        }
 
     }
 
@@ -164,5 +175,15 @@ public class Board extends GridPane {
         alert.setContentText(messege);
 
         alert.showAndWait();
+    }
+
+    public int getSelectedRank()
+    {
+        return selectedRank;
+    }
+
+    public int getSelecteFile()
+    {
+        return selectedFile;
     }
 }
