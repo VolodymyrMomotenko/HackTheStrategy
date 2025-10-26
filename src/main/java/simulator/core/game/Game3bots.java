@@ -20,9 +20,7 @@ public class Game3bots extends Game
     protected void initializePosition()
     {
         // Create an empty board for now
-        InterestPoint[][] board = new InterestPoint[10][10];
-
-        board[0][0] = new Mine();
+        Tile[][] board = new Tile[10][10];
 
         // Set the starting position
         this.startingPosition = new Position(board, Colour.WHITE);
