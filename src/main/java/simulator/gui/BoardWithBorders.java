@@ -19,7 +19,7 @@ public class BoardWithBorders extends GridPane
     private static final int SQUARE_SIZE = 80;
     private final Board board;
     private VBox sidePanel;
-    private Label coordinateLabel1;
+    private Label coordinateLabel1, coordinateLabel2;
     public HumanPlayer player = new HumanPlayer(Colour.YELLOW);
 
     public BoardWithBorders(Game game)
@@ -41,6 +41,7 @@ public class BoardWithBorders extends GridPane
                 + "\nMines : " + player.getMines()
                 + "\nFarms : " + player.getFarms());
 
+        coordinateLabel2 = new Label("No Selection");
 
         Button buyZone = new Button("Buy a zone");
         Button buildFarm = new Button("Build a farm for 8");
@@ -48,11 +49,37 @@ public class BoardWithBorders extends GridPane
         
         
         
-        sidePanel.getChildren().addAll(coordinateLabel1, buyZone, buildFarm, endTurnButton);
+        sidePanel.getChildren().addAll(coordinateLabel1, coordinateLabel2, buyZone, buildFarm, endTurnButton);
         
         // board is not board with the sidelabel
         buildCoordinateSystem(); // square from (0, 0) to (11, 11)
         add(sidePanel, 12, 0, 1, 12); // Add sidepanel for col 12
+    }
+
+    public void updateSelectionInfo()
+    {
+        if (board.getselectedSquare() == null)
+        {
+            coordinateLabel2.setText("No Selection");
+        }
+        else
+        {
+            String message = String.format("Selected: (%d, %d)", board.getSelecteFile(), board.getSelectedRank());
+
+            if (board.getGame().getPosition().isOwned(board.getSelecteFile(), board.getSelectedRank()))
+            {
+                message += "\nYou may build a farm here!";
+            }
+            else if (board.getGame().getPosition().canAquire(board.getSelecteFile(), board.getSelectedRank()))
+            {
+                message += "\nYou may buy this piece of land";
+            }
+            else
+            {
+                message += "\nYou can't do anything with it";
+            }
+            coordinateLabel2.setText(message);
+        }
     }
 
     public void connectBoardToThis()

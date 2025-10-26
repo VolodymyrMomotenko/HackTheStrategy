@@ -136,6 +136,7 @@ public class Board extends GridPane {
         {
             selectedSquare = null;
         }
+        border.updateSelectionInfo();
 
     }
 
@@ -190,5 +191,10 @@ public class Board extends GridPane {
     public int getSelecteFile()
     {
         return selectedFile;
+    }
+
+    public Game getGame()
+    {
+        return game;
     }
 }
