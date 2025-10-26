@@ -9,9 +9,8 @@ import simulator.core.Position;
 
 public abstract class Game
 {
-    protected String whitePlayer; // may store Addr of playent if i ever make it a web-application
-    protected String blackPlayer;
-    protected Position startingPosition;
+    protected String firstplayer;
+    protected Position position;
     protected Position cachedCurrentPosition;
 
     private int moveCounter; // for 50 move rule
@@ -19,38 +18,30 @@ public abstract class Game
     private Boolean isGameEnd = false;
 
     
-    public Game(String p1, String p2, Position startingPosition)
+    public Game(String p1, Position startingPosition)
     {
-        this.whitePlayer = p1;
-        this.blackPlayer = p2;
-        this.startingPosition = startingPosition;
+        this.firstplayer = p1;
+        this.position = startingPosition;
     }
 
     // Overloaded constructor for games that generate their starting position
-    public Game(String p1, String p2)
+    public Game(String p1)
     {
-        this(p1, p2, null);
+        this(p1, null);
         initializePosition();
     }
 
     protected abstract void initializePosition();
 
-    public Position getStartingPosition()
+    public Position getPosition()
     {
-        return startingPosition;
+        return position;
     }
 
-    public String getWhitePlayer()
+    public String getFirstPlayer()
     {
-        return whitePlayer;
+        return firstplayer;
     }
-
-
-    public String getBlackPlayer()
-    {
-        return blackPlayer;
-    }
-
 
     public Boolean hasGameEnded()
     {

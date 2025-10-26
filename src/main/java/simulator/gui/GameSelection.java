@@ -25,7 +25,7 @@ public class GameSelection extends Application
         title.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
         
         Button standardButton = new Button("3 bots 1 player");
-        standardButton.setOnAction(e -> launchGame(new Game3bots("White", "Black")));
+        standardButton.setOnAction(e -> launchGame(new Game3bots("Hooman")));
         
         root.getChildren().addAll(title, standardButton);
         

@@ -4,7 +4,6 @@ import java.nio.charset.MalformedInputException;
 import java.util.List;
 import java.util.Optional;
 
-import javax.swing.text.Position;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -23,6 +22,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import simulator.core.Colour;
+import simulator.core.Position;
+import simulator.core.Tile;
 import simulator.core.game.Game;
 import simulator.core.pointsOfInterest.InterestPoint;
 import simulator.core.pointsOfInterest.Mine;
@@ -37,7 +38,6 @@ public class Board extends GridPane {
 
     
     public boolean shouldFlip = true;
-    public Colour colourDisplayPerspective = Colour.WHITE; 
     public BoardWithBorders border = null;
 
     public Board(Game game)
@@ -45,7 +45,7 @@ public class Board extends GridPane {
         this.game = game;
         initializeBoard();
         //setupFlipControls();
-        //updatePosition();
+        updateBoard();
     }
 
     private void initializeBoard()
@@ -59,10 +59,10 @@ public class Board extends GridPane {
                 Color squareColor = (file + rank) % 2 == 0 ? Color.rgb(240, 240, 240) : Color.rgb(231, 231, 231);
                 Square squarePane = new Square(squareColor, SQUARE_SIZE);
 
-                InterestPoint point = game.getStartingPosition().getTile(file, 9-rank).getInterestPoint();
+                InterestPoint point = game.getPosition().getTile(file, 9-rank).getInterestPoint();
                 InterestPointRender render = point == null ? null : new InterestPointRender(point);
 
-                squarePane.setHighlight(render);
+                squarePane.setPoint(render);
                 squares[file][rank] = squarePane;
                 add(squarePane, file, rank);
 
@@ -74,7 +74,45 @@ public class Board extends GridPane {
 
     private void updateBoard()
     {
+        Position current = game.getPosition();
+        
+        for (int rank = 0; rank < 10; rank++)
+        {
+            for (int file = 0; file < 10; file++)
+            {
+                int displayRank = 9 - rank;
 
+                Tile piece = current.getTile(file, displayRank);
+                Color squareColor = (file + rank) % 2 == 0 ? Color.rgb(240, 240, 240) : Color.rgb(231, 231, 231);
+                
+                Colour tileColour = piece.getColour();
+                if (tileColour != null)
+                {
+                    switch(tileColour)
+                    {
+                        case Colour.RED:
+                            squareColor = Color.RED;
+                            break;
+                        case Colour.BLUE:
+                            squareColor = Color.BLUE;
+                            break;
+                        case Colour.GREEN:
+                            squareColor = Color.GREEN;
+                            break;
+                        case Colour.YELLOW:
+                            squareColor = Color.YELLOW;
+                            break;
+                        default:
+                    }
+                }
+
+                squares[file][rank].setColour(squareColor);
+                InterestPoint point = game.getPosition().getTile(file, 9-rank).getInterestPoint();
+                InterestPointRender render = point == null ? null : new InterestPointRender(point);
+                squares[file][rank].setPoint(render);
+                System.out.println("File: " + file + " Rank: " + rank + " Colour " + tileColour + " point " + point);
+            }
+        }
     }
 
     // needs to be a seperste function because lambda wants final variables
@@ -93,7 +131,7 @@ public class Board extends GridPane {
 
     private void highlightSelection(int file, int rank)
     {
-        rank = colourDisplayPerspective == Colour.WHITE ? 9 - rank : rank;
+        rank = 9 - rank;
 
         Square pane = squares[file][rank];
         Rectangle highlight = new Rectangle(SQUARE_SIZE, SQUARE_SIZE, Color.YELLOW);

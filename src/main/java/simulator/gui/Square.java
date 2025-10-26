@@ -26,7 +26,7 @@ public class Square extends StackPane
         setLayer(LAYER_BACKGROUND, new Rectangle(squareSize, squareSize, colour));
     }
     
-    public void setPiece(Node interestPoint)
+    public void setPoint(Node interestPoint)
     {
         setLayer(LAYER_POINT, interestPoint);
     }

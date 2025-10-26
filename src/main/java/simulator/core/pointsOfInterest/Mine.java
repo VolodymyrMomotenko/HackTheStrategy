@@ -7,4 +7,9 @@ public class Mine extends InterestPoint
         super(11, 4);
 
     }
+
+    public String toString()
+    {
+        return "Mine";
+    }
 }

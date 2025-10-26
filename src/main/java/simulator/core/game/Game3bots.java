@@ -10,9 +10,9 @@ import simulator.gui.InterestPointRender;
 public class Game3bots extends Game
 {
 
-    public Game3bots(String p1, String p2)
+    public Game3bots(String p1)
     {
-        super(p1, p2);
+        super(p1);
     }
 
 
@@ -30,7 +30,14 @@ public class Game3bots extends Game
 
         board[0][1].setInterestPoint(new Mine());
 
+
+        board[0][0].setColour(Colour.RED);
+        board[0][0].setInterestPoint(new Mine());
+        board[9][0].setColour(Colour.GREEN);
+        board[9][9].setColour(Colour.YELLOW);
+        board[0][9].setColour(Colour.BLUE);
+
         // Set the starting position
-        this.startingPosition = new Position(board, Colour.WHITE);
+        this.position = new Position(board, Colour.WHITE);
     }
 }
