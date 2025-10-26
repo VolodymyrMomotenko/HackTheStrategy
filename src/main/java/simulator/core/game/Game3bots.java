@@ -4,6 +4,7 @@ import simulator.core.Colour;
 import simulator.core.Position;
 import simulator.core.Tile;
 import simulator.core.player.Player;
+import simulator.core.player.BotPlayer;
 import simulator.core.player.HumanPlayer;
 import simulator.core.pointsOfInterest.Farm;
 import simulator.core.pointsOfInterest.InterestPoint;
@@ -18,6 +19,9 @@ public class Game3bots extends Game
     {
         super(p1);
         this.players[0] = new HumanPlayer(Colour.RED);
+        this.players[1] = new BotPlayer(Colour.BLUE);
+        this.players[2] = new BotPlayer(Colour.YELLOW);
+        this.players[3] = new BotPlayer(Colour.GREEN);
     }
 
 
@@ -50,6 +54,6 @@ public class Game3bots extends Game
         board[0][9].setColour(Colour.BLUE);
 
         // Set the starting position
-        this.position = new Position(board, Colour.WHITE);
+        this.position = new Position(board, Colour.RED);
     }
 }

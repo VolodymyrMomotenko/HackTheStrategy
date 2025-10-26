@@ -45,7 +45,6 @@ public class Board extends GridPane {
     {
         this.game = game;
         initializeBoard();
-        //setupFlipControls();
         updateBoard();
     }
 
@@ -73,7 +72,7 @@ public class Board extends GridPane {
         }
     }
 
-    private void updateBoard()
+    public void updateBoard()
     {
         Position current = game.getPosition();
         

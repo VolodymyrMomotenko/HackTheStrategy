@@ -3,8 +3,8 @@ package simulator.core.player;
 import simulator.core.Colour;
 import java.util.Random;
 
-public class botPlayer extends Player{
-    public botPlayer(Colour colour)
+public class BotPlayer extends Player{
+    public BotPlayer(Colour colour)
     {
         super(colour);
     }

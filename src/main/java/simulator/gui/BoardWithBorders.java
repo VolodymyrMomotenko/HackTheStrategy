@@ -2,6 +2,9 @@ package simulator.gui;
 
 import simulator.core.Colour;
 import simulator.core.game.Game;
+
+import java.beans.EventHandler;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -21,11 +24,12 @@ public class BoardWithBorders extends GridPane
     private final Board board;
     private VBox sidePanel;
     private Label coordinateLabel1, coordinateLabel2;
-    public HumanPlayer player = new HumanPlayer(Colour.YELLOW);
+    public Player player;
 
     public BoardWithBorders(Game game)
     {
         this.board = new Board(game);
+        player = game.getCurrentPlayer();
         setupCombinedLayout();
     }
 
@@ -48,7 +52,7 @@ public class BoardWithBorders extends GridPane
         Button buildFarm = new Button("Build a farm for 8");
         Button endTurnButton = new Button("End Turn");
 
-        endTurnButton.setOnAction(e -> {player.addIncome(); player.addWealth(); updateStats();});
+        endTurnButton.setOnAction(e -> handleEndTurn());
         buildFarm.setOnAction(e -> {player.substractWealth(8); updateStats();
             board.getGame().getPosition().getTile(board.getSelecteFile(), board.getSelectedRank()).setInterestPoint(new Farm());});
 
@@ -59,6 +63,19 @@ public class BoardWithBorders extends GridPane
         // board is not board with the sidelabel
         buildCoordinateSystem(); // square from (0, 0) to (11, 11)
         add(sidePanel, 12, 0, 1, 12); // Add sidepanel for col 12
+    }
+
+    private void handleEndTurn()
+    {
+        Game game = board.getGame();
+    
+        Player currentPlayer = game.getCurrentPlayer();
+        player.addIncome();
+        player.addWealth(); 
+        if (player instanceof HumanPlayer)
+            updateStats();
+        board.updateBoard();
+        game.getPosition().nextTurn();
     }
 
     public void updateStats()

@@ -12,7 +12,6 @@ public abstract class Game
 {
     protected String firstplayer;
     protected Position position;
-    protected Position cachedCurrentPosition;
 
     protected Player[] players = new Player[4];
 
@@ -35,6 +34,11 @@ public abstract class Game
     }
 
     protected abstract void initializePosition();
+
+    public Player getCurrentPlayer()
+    {
+        return players[position.getCurrentPlayerIndex()];
+    }
 
     public Position getPosition()
     {

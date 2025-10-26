@@ -1,6 +1,7 @@
 package simulator.core;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import simulator.core.player.Player;
 import simulator.core.pointsOfInterest.InterestPoint;
@@ -10,13 +11,25 @@ public class Position
     //private static final int BOARD_SIZE = 10;
 
     private Tile[][] board = new Tile[10][10]; // empty board
+
     private Colour turn;
+    private List<Colour> playerOrder;
+    private int currentPlayerIndex;
      
 
     public Position(Tile[][] board, Colour turn)
     {
         this.board = board;
         this.turn = turn;
+
+        this.playerOrder = List.of(Colour.RED, Colour.BLUE, Colour.YELLOW, Colour.GREEN);
+        this.currentPlayerIndex = playerOrder.indexOf(turn);
+    }
+
+    public void nextTurn()
+    {
+        currentPlayerIndex = (currentPlayerIndex+1) % playerOrder.size();
+        turn = playerOrder.get(currentPlayerIndex);
     }
 
     public Boolean isOwned(int file, int rank){
@@ -78,6 +91,16 @@ public class Position
         if (canAquire(file, rank)){
             getTile(file, rank).setColour(turn);
         }
+    }
+
+    public Colour getTurn()
+    {
+        return turn;
+    }
+
+    public int getCurrentPlayerIndex()
+    {
+        return currentPlayerIndex;
     }
 
     public void printBoard()
