@@ -88,22 +88,7 @@ public class Board extends GridPane {
                 Colour tileColour = piece.getColour();
                 if (tileColour != null)
                 {
-                    switch(tileColour)
-                    {
-                        case Colour.RED:
-                            squareColor = Color.RED;
-                            break;
-                        case Colour.BLUE:
-                            squareColor = Color.BLUE;
-                            break;
-                        case Colour.GREEN:
-                            squareColor = Color.GREEN;
-                            break;
-                        case Colour.YELLOW:
-                            squareColor = Color.YELLOW;
-                            break;
-                        default:
-                    }
+                    squareColor = colour2color(tileColour);
                 }
 
                 squares[file][rank].setColour(squareColor);
@@ -114,6 +99,23 @@ public class Board extends GridPane {
             }
         }
     }
+
+    public Color colour2color(Colour colour)
+    {
+        switch(colour)
+        {
+            case Colour.RED:
+                return Color.RED;
+            case Colour.BLUE:
+                return Color.BLUE;
+            case Colour.GREEN:
+                return Color.GREEN;
+            case Colour.YELLOW:
+                return Color.YELLOW;
+            default:
+                return null;
+        }
+    } 
 
     // needs to be a seperste function because lambda wants final variables
     private void setSquareHandler(Square square, final int file, final int rank)
@@ -145,7 +147,7 @@ public class Board extends GridPane {
         rank = 9 - rank;
 
         Square pane = squares[file][rank];
-        Rectangle highlight = new Rectangle(SQUARE_SIZE, SQUARE_SIZE, Color.YELLOW);
+        Rectangle highlight = new Rectangle(SQUARE_SIZE, SQUARE_SIZE, colour2color(game.getPosition().getTurn()));
         highlight.setOpacity(0.5);
         pane.setHighlight(highlight);
     }

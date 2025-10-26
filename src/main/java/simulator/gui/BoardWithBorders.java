@@ -17,6 +17,7 @@ import javafx.scene.shape.Rectangle;
 import simulator.core.player.HumanPlayer;
 import simulator.core.player.Player;
 import simulator.core.pointsOfInterest.Farm;
+import simulator.core.pointsOfInterest.Zone;
 
 public class BoardWithBorders extends GridPane
 {
@@ -44,7 +45,8 @@ public class BoardWithBorders extends GridPane
                 + "\nIncome per turn $ : " + player.getIncome()
                 + "\nZones : " + player.getTiles()
                 + "\nMines : " + player.getMines()
-                + "\nFarms : " + player.getFarms());
+                + "\nFarms : " + player.getFarms()
+                + "\nYour colour: " + player.getColour());
 
         coordinateLabel2 = new Label("No Selection");
 
@@ -53,9 +55,8 @@ public class BoardWithBorders extends GridPane
         Button endTurnButton = new Button("End Turn");
 
         endTurnButton.setOnAction(e -> handleEndTurn());
-        buildFarm.setOnAction(e -> {player.substractWealth(8); updateStats();
-            board.getGame().getPosition().getTile(board.getSelecteFile(), board.getSelectedRank()).setInterestPoint(new Farm());});
-
+        buildFarm.setOnAction(e -> handleBuildFarm());
+        buyZone.setOnAction(e -> handleBuyZone());
         
         
         sidePanel.getChildren().addAll(coordinateLabel1, coordinateLabel2, buyZone, buildFarm, endTurnButton);
@@ -65,26 +66,73 @@ public class BoardWithBorders extends GridPane
         add(sidePanel, 12, 0, 1, 12); // Add sidepanel for col 12
     }
 
-    private void handleEndTurn()
+    private void handleBuyZone()
     {
         Game game = board.getGame();
     
         Player currentPlayer = game.getCurrentPlayer();
-        player.addIncome();
-        player.addWealth(); 
-        if (player instanceof HumanPlayer)
-            updateStats();
-        board.updateBoard();
-        game.getPosition().nextTurn();
+
+        if(game.getPosition().canAquire(board.getSelecteFile(), board.getSelectedRank()))
+        {
+            currentPlayer.substractWealth(4);
+            if (currentPlayer instanceof HumanPlayer)
+                updateStatsDisplay();
+            game.getPosition().getTile(board.getSelecteFile(), board.getSelectedRank()).setInterestPoint(new Zone());
+            game.getPosition().getTile(board.getSelecteFile(), board.getSelectedRank()).setColour(game.getPosition().getTurn());
+            game.getPosition().nextTurn();
+            board.updateBoard();
+        }
+        else
+        {
+            coordinateLabel2.setText("Can;t buy!");
+        }
     }
 
-    public void updateStats()
+    private void handleBuildFarm()
+    {
+        Game game = board.getGame();
+    
+        Player currentPlayer = game.getCurrentPlayer();
+
+        if(game.getPosition().isOwned(board.getSelecteFile(), board.getSelectedRank()))
+        {
+            currentPlayer.substractWealth(8);
+            if (currentPlayer instanceof HumanPlayer)
+                updateStatsDisplay();
+            game.getPosition().getTile(board.getSelecteFile(), board.getSelectedRank()).setInterestPoint(new Farm());
+            game.getPosition().nextTurn();
+            board.updateBoard();
+        }
+        else
+        {
+            coordinateLabel2.setText("Can;t buy!");
+        }
+    }
+
+    private void handleEndTurn()
+    {
+        Game game = board.getGame();
+    
+        
+        Player currentPlayer = game.getCurrentPlayer();
+        currentPlayer.addIncome();
+        currentPlayer.addWealth(); 
+        if (currentPlayer instanceof HumanPlayer)
+            updateStatsDisplay();
+        board.updateBoard();
+        game.getPosition().nextTurn();
+
+        System.out.println(game.getCurrentPlayer().getColour());
+    }
+
+    public void updateStatsDisplay()
     {
         coordinateLabel1.setText("Your Stats:\n$ : " + player.getWealth()
                 + "\nIncome per turn $ : " + player.getIncome()
                 + "\nZones : " + player.getTiles()
                 + "\nMines : " + player.getMines()
-                + "\nFarms : " + player.getFarms());
+                + "\nFarms : " + player.getFarms()
+                + "\nYour colour: " + player.getColour());
     }
 
 
@@ -101,9 +149,6 @@ public class BoardWithBorders extends GridPane
             if (board.getGame().getPosition().isOwned(board.getSelecteFile(), board.getSelectedRank()))
             {
                 message += "\nYou may build a farm here!";
-                Button buildFarm = new Button("Build a farm for 8");
-                buildFarm.setOnAction(e -> {player.substractWealth(8); updateStats();});
-
             }
             else if (board.getGame().getPosition().canAquire(board.getSelecteFile(), board.getSelectedRank()))
             {
