@@ -2,6 +2,7 @@ package simulator.core;
 
 import java.util.ArrayList;
 
+import simulator.core.player.Player;
 import simulator.core.pointsOfInterest.InterestPoint;
 
 public class Position
@@ -23,6 +24,9 @@ public class Position
     }
 
     public Boolean canAquire(int file, int rank){
+        // fist chech whether the tile is already taken by somebody
+        if (getTile(file, rank).getColour() != null) return false;
+
         ArrayList<Tile> neighbours = getNeighbours(file, rank);
 
         for(Tile tile : neighbours){
@@ -67,6 +71,13 @@ public class Position
     public Tile getTile(int file, int rank)
     {
         return board[file][rank];
+    }
+
+    public void buyTile(int file, int rank)
+    {
+        if (canAquire(file, rank)){
+            getTile(file, rank).setColour(turn);
+        }
     }
 
     public void printBoard()

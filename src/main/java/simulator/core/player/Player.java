@@ -2,8 +2,7 @@ package simulator.core.player;
 
 import simulator.core.Colour;
 
-public abstract class Player
-{
+public abstract class Player {
     private Colour colour;
     private int wealth;
     private int tiles;
@@ -11,8 +10,7 @@ public abstract class Player
     private int farms;
     private int income;
 
-    public Player(Colour colour)
-    {
+    public Player(Colour colour){
         this.colour = colour;
         this.wealth = 10;
         this.tiles = 4;
