@@ -177,6 +177,11 @@ public class Board extends GridPane {
         alert.showAndWait();
     }
 
+    public Square getselectedSquare()
+    {
+        return selectedSquare;
+    }
+
     public int getSelectedRank()
     {
         return selectedRank;

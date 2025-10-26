@@ -17,7 +17,7 @@ public class BoardWithBorders extends GridPane
     private static final int SQUARE_SIZE = 80;
     private final Board board;
     private VBox sidePanel;
-    private Label coordinateLabel1, coordinateLabel2, coordinateLabel3, coordinateLabel4;
+    private Label coordinateLabel1;
 
     public BoardWithBorders(Game game)
     {
