@@ -1,5 +1,6 @@
 package simulator.gui;
 
+import java.nio.charset.MalformedInputException;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +24,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import simulator.core.Colour;
 import simulator.core.game.Game;
+import simulator.core.pointsOfInterest.InterestPoint;
+import simulator.core.pointsOfInterest.Mine;
 
 public class Board extends GridPane {
     private static final int SQUARE_SIZE = 80;
@@ -55,6 +58,9 @@ public class Board extends GridPane {
             {
                 Color squareColor = (file + rank) % 2 == 0 ? Color.rgb(240, 240, 240) : Color.rgb(231, 231, 231);
                 Square squarePane = new Square(squareColor, SQUARE_SIZE);
+                InterestPoint point = game.getStartingPosition().getInterestPoint(file, 9-rank);
+                InterestPointRender render = point == null ? null : new InterestPointRender(point);
+                squarePane.setHighlight(render);
                 squares[file][rank] = squarePane;
                 add(squarePane, file, rank);
 

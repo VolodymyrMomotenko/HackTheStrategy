@@ -3,6 +3,9 @@ package simulator.core.game;
 import simulator.core.Colour;
 import simulator.core.Position;
 import simulator.core.Tile;
+import simulator.core.pointsOfInterest.InterestPoint;
+import simulator.core.pointsOfInterest.Mine;
+import simulator.gui.InterestPointRender;
 
 public class Game3bots extends Game
 {
@@ -17,7 +20,9 @@ public class Game3bots extends Game
     protected void initializePosition()
     {
         // Create an empty board for now
-        Tile[][] board = new Tile[10][10];
+        InterestPoint[][] board = new InterestPoint[10][10];
+
+        board[0][0] = new Mine();
 
         // Set the starting position
         this.startingPosition = new Position(board, Colour.WHITE);

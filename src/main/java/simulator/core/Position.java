@@ -1,25 +1,27 @@
 package simulator.core;
 
 
+import simulator.core.pointsOfInterest.InterestPoint;
+
 import java.util.List;
 
 public class Position
 {
     //private static final int BOARD_SIZE = 10;
 
-    private Tile[][] board = new Tile[10][10]; // empty board
+    private InterestPoint[][] board = new InterestPoint[10][10]; // empty board
     private Colour turn;
      
 
-    public Position(Tile[][] board, Colour turn)
+    public Position(InterestPoint[][] board, Colour turn)
     {
         this.board = board;
         this.turn = turn;
     }
 
-    public Tile[][] deepCopyBoard()
+    public InterestPoint[][] deepCopyBoard()
     {
-        Tile[][] newBoard = new Tile[10][10];
+        InterestPoint[][] newBoard = new InterestPoint[10][10];
 
         for(int row = 0; row < board.length; row ++)
         {
@@ -30,6 +32,11 @@ public class Position
         }
 
         return newBoard;
+    }
+
+    public InterestPoint getInterestPoint(int file, int rank)
+    {
+        return board[file][rank];
     }
 
     public void printBoard()

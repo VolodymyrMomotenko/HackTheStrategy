@@ -1,5 +1,6 @@
 package simulator.core;
 
+import simulator.core.pointsOfInterest.InterestPoint;
 
 public class Tile
 {
