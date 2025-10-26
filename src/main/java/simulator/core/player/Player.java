@@ -8,6 +8,7 @@ public abstract class Player {
     private int tiles;
     private int mines;
     private int farms;
+    private int income;
 
     public Player(Colour colour){
         this.colour = colour;
@@ -15,6 +16,7 @@ public abstract class Player {
         this.tiles = 4;
         this.mines = 0;
         this.farms = 0;
+        this.income = 0;
     }
 
     // getters
@@ -38,10 +40,18 @@ public abstract class Player {
         return this.farms;
     }
 
+    public int getIncome(){
+        return this.income;
+    }
+
 
     // kinda setters (more like adders)
     public void addWealth(int money){
-        this.wealth += money;
+        this.wealth += this.income;
+    }
+
+    public void addIncome(){
+        this.income = this.tiles + this.mines * 4 + this.farms * 2;
     }
 
     public void addOneTile(){
