@@ -1,5 +1,7 @@
 package simulator.core;
 
+import java.util.ArrayList;
+
 import simulator.core.pointsOfInterest.InterestPoint;
 
 public class Position
@@ -16,9 +18,36 @@ public class Position
         this.turn = turn;
     }
 
-    // public Boolean canAquire(int file, int rank){
-        
-    // }
+    public Boolean isOwned(int file, int rank){
+        return getTile(file, rank).getColour() == turn;
+    }
+
+    public Boolean canAquire(int file, int rank){
+        ArrayList<Tile> neighbours = getNeighbours(file, rank);
+
+        for(Tile tile : neighbours){
+            if(tile.getColour() == turn){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ArrayList<Tile> getNeighbours(int file, int rank){
+        ArrayList<Tile> neighbours = new ArrayList<>();
+
+        if (isInBounds(file+1, rank)) neighbours.add(getTile(file+1, rank));
+        if (isInBounds(file-1, rank)) neighbours.add(getTile(file-1, rank));
+        if (isInBounds(file, rank+1)) neighbours.add(getTile(file, rank+1));
+        if (isInBounds(file, rank-1)) neighbours.add(getTile(file, rank-1));
+
+        return neighbours;
+    }
+
+    public Boolean isInBounds(int file, int rank){
+        return (0 <= file && file < 10 && rank >= 0 && rank < 10);
+    }
+
 
     public Tile[][] deepCopyBoard()
     {
