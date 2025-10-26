@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import simulator.core.player.HumanPlayer;
 import simulator.core.player.Player;
+import simulator.core.pointsOfInterest.Farm;
 
 public class BoardWithBorders extends GridPane
 {
@@ -48,7 +49,9 @@ public class BoardWithBorders extends GridPane
         Button endTurnButton = new Button("End Turn");
 
         endTurnButton.setOnAction(e -> {player.addIncome(); player.addWealth(); updateStats();});
-        
+        buildFarm.setOnAction(e -> {player.substractWealth(8); updateStats();
+            board.getGame().getPosition().getTile(board.getSelecteFile(), board.getSelectedRank()).setInterestPoint(new Farm());});
+
         
         
         sidePanel.getChildren().addAll(coordinateLabel1, coordinateLabel2, buyZone, buildFarm, endTurnButton);
@@ -81,6 +84,9 @@ public class BoardWithBorders extends GridPane
             if (board.getGame().getPosition().isOwned(board.getSelecteFile(), board.getSelectedRank()))
             {
                 message += "\nYou may build a farm here!";
+                Button buildFarm = new Button("Build a farm for 8");
+                buildFarm.setOnAction(e -> {player.substractWealth(8); updateStats();});
+
             }
             else if (board.getGame().getPosition().canAquire(board.getSelecteFile(), board.getSelectedRank()))
             {

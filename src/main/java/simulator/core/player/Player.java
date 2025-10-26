@@ -65,4 +65,6 @@ public abstract class Player {
     public void addOneFarm(){
         this.farms += 1;
     }
+
+    public void substractWealth(int price){ this.wealth -= price; }
 }
