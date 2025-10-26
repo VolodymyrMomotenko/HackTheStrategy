@@ -8,7 +8,7 @@ import javafx.scene.shape.Rectangle;
 public class Square extends StackPane
 {
     public static final int LAYER_BACKGROUND = 0;
-    public static final int LAYER_PIECE = 1;
+    public static final int LAYER_POINT = 1;
     public static final int LAYER_HIGHLIGHT = 2;
     
     private final Node[] layers = new Node[3];
@@ -26,9 +26,9 @@ public class Square extends StackPane
         setLayer(LAYER_BACKGROUND, new Rectangle(squareSize, squareSize, colour));
     }
     
-    public void setPiece(Node piece)
+    public void setPiece(Node interestPoint)
     {
-        setLayer(LAYER_PIECE, piece);
+        setLayer(LAYER_POINT, interestPoint);
     }
     
     public void setHighlight(Node highlight)
